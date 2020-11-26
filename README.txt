@@ -1,6 +1,6 @@
 MethodoDriveFermier
 
-Nom du projet : Driver Fermier
+Nom du projet : Drive Fermier
 Auteurs : Hugo JAMINON, Théo LOMEGE, Jordan BISSON, Wassim SADKI
 État du projet : Méthodologie (Squelette de code)
 Rapide description : Le projet consiste en la création d'un site web pour un drive fermier
