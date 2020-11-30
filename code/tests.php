@@ -82,12 +82,12 @@
 
     function verifMail($mail){
 
-        $erreur = False;
+        $valide = False;
 
         if (filter_var($mail,FILTER_VALIDATE_EMAIL)){
-            $erreur = True;
+            $valide = True;
         }
-        return $erreur;
+        return $valide;
     }
 
     function testVerifMail(){
@@ -119,6 +119,7 @@
             return $ok;
     }
 
+
     if (testVerifMail())
     {
         echo"\nTest Mail Vrai\n";
@@ -129,5 +130,57 @@
     }
 
 
+    function verifCarteBancaire($cb){
+        $valide = True; 
+        if (!is_numeric($cb)){
+            $valide = False;
+        }
 
+        if (strlen($cb) != 16){
+            $valide = False;
+        } 
+        return $valide;
+
+    }
+
+    function testVerifCarteBancaire(){
+
+        $test_tab = [
+            ["0306020504010306",True],
+            ["11111",False],
+            ["0986020444412306",True],
+            ["wassim@",False],
+            ["abcdefghijkljkal",False], 
+            ["0634472514",False], 
+            ["698*9856éd",False],
+            ["",False]
+            ];
+    
+            $ok = TRUE;
+    
+            foreach($test_tab as $testval)
+            {
+                
+                if(verifCarteBancaire($testval[0]) != $testval[1])
+                {
+                    $ok = FALSE;
+                    
+                }
+        
+            }
+    
+            return $ok;
+    }
+
+
+    if (testVerifCarteBancaire())
+    {
+        echo"\nTest Carte Bancaire Vrai\n";
+    }
+    else
+    {
+        echo"\nTest Carte Bancaire Faux\n";
+    }
+
+    
 ?>
