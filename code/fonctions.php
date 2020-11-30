@@ -300,7 +300,9 @@ Flight::route('/profil', function(){
  * 
  */
 Flight::route('GET /logout', function(){ 
+  $_SESSION=array();
   session_destroy();
+  session_start();
   Flight::redirect("/");
    
 
