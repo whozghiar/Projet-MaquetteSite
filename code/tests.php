@@ -1,17 +1,18 @@
 <?php
 
+
+
     function isValid($date, $format = 'd/m/Y'){
 
         $dt = DateTime::createFromFormat($format, $date);
         return $dt && $dt->format($format) === $date;
-
     }
+
     function calculAge($date)
     {
         if (strlen($date) != 10) {
             return false;
         }
-
 
         if (isValid($date,$format = 'd/m/Y') == False){
             return false;
@@ -40,7 +41,7 @@
 
        
 
-    function TestCalculAge()
+    function testCalculAge()
     {
         $test_tab = [
         ["10/10/2000",20],
@@ -58,7 +59,7 @@
         foreach($test_tab as $testval)
         {
             
-            if(CalculAge($testval[0]) != $testval[1])
+            if(calculAge($testval[0]) != $testval[1])
             {
                 $ok = FALSE;
                 
@@ -69,13 +70,64 @@
         return $ok;
     }
 
-    if (TestCalculAge())
+    if (testCalculAge())
     {
-        echo"\nTest Vrai";
+        echo"\nTest calculAge Vrai \n";
     }
     else
     {
-        echo"\nTest Faux";
+        echo"\nTest calculAge Faux \n ";
     }
+
+
+    function verifMail($mail){
+
+        $erreur = False;
+
+        if (filter_var($mail,FILTER_VALIDATE_EMAIL)){
+            $erreur = True;
+        }
+        return $erreur;
+    }
+
+    function testVerifMail(){
+
+        $test_tab = [
+            ["theo@hotmail",FALSE],
+            ["hugo@hotmail.fr",True],
+            ["jordanoutlook.com",FALSE],
+            ["wassim@",FALSE],
+            ["bilojasa@hotmail.com",True], 
+            ["test",False], 
+            ["e@gmail.fr",True],
+            ["e@f.de",True]
+            ];
+    
+            $ok = TRUE;
+    
+            foreach($test_tab as $testval)
+            {
+                
+                if(verifMail($testval[0]) != $testval[1])
+                {
+                    $ok = FALSE;
+                    
+                }
+        
+            }
+    
+            return $ok;
+    }
+
+    if (testVerifMail())
+    {
+        echo"\nTest Mail Vrai\n";
+    }
+    else
+    {
+        echo"\nTest Mail Faux\n";
+    }
+
+
 
 ?>
